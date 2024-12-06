@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
+:root {
+  --prime: 255, 110, 72;
+  --ciBlue: 0, 255, 241;
+  --ciRed: 255, 0, 170;
+  --ciWhite: 255, 255, 255;
+  --ciGreen: 70, 252, 180;
+  --ciSecond: 12, 16, 22;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("https://assets.codepen.io/907368/Roboto-Bold.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("https://assets.codepen.io/907368/Roboto-Regular.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("https://assets.codepen.io/907368/Roboto-Light.ttf");
+  font-weight: 300;
+}
+
+* {
+  @apply box-border;
+}
+.slider {
+  @apply w-full h-full relative overflow-hidden;
+  --inner: 8rem;
+  --middle: 20rem;
+}
+.slider .slider-button {
+  @apply absolute z-[5] bg-[rgba(255,255,255,0.1)] backdrop-blur-[10px] cursor-pointer w-10 aspect-[1/1] grid place-items-center rounded-lg border-[none] bottom-4;
+  -webkit-backdrop-filter: blur(10px);
+}
+.slider .slider-button img {
+  @apply w-3/5 aspect-[1/1];
+}
+.slider .slider-button.prev {
+  @apply left-4;
+}
+.slider .slider-button.prev img {
+  rotate: 90deg;
+}
+.slider .slider-button.next {
+  @apply right-4;
+}
+.slider .slider-button.next img {
+  rotate: -90deg;
+}
+.slider .slide {
+  @apply h-full w-full absolute inset-0;
+}
+.slider .slide.active img {
+  @apply blur-none opacity-100;
+}
+.slider .slide.active img.inner {
+  rotate: 0deg;
+}
+.slider .slide.active img.middle {
+  rotate: 0deg;
+}
+.slider .slide.active img.outer {
+  rotate: 0deg;
+}
+.slider .slide img {
+  @apply absolute w-full h-full opacity-0 object-cover object-[50%_50%] transition-all duration-[1s] ease-[ease] blur-[50px];
+  scale: 1.2;
+  -o-object-fit: cover;
+  -o-object-position: 50% 50%;
+}
+.slider .slide img.inner {
+  @apply z-[3];
+  rotate: -30deg;
+  -webkit-clip-path: ellipse(var(--inner) var(--inner) at 50% 50%);
+  clip-path: ellipse(var(--inner) var(--inner) at 50% 50%);
+}
+.slider .slide img.middle {
+  @apply z-[2];
+  rotate: 30deg;
+  -webkit-clip-path: ellipse(var(--middle) var(--middle) at 50% 50%);
+  clip-path: ellipse(var(--middle) var(--middle) at 50% 50%);
+}
+.slider .slide img.outer {
+  @apply z-[1];
+  rotate: -5deg;
+}
